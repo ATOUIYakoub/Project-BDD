@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row mt-4">
+    {% include 'menu.html' %} {% for book in books_to_return %}
+    <div class="col-6">
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Notice !</h4>
+        <p>
+          You should give back the book by name "{{ book.book.title }}" in 2
+          days from now.
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

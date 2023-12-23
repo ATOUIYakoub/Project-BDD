@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row mt-4">
+    {% include 'menu.html' %}
+    <div class="col-4 border bg-white">
+      <h5 class="mt-3">Change Profile Avatar</h5>
+      <hr />
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mt-3">
+          {{form.as_p}}
+          <div class="input-group mb-3">
+            <button type="submit" class="btn btn-outline-primary w-100">
+              Change Profile Photo
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

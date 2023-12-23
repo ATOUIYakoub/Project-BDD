@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+<div class="container">
+  <div class="row mt-4">
+    {% include 'menu.html' %}
+    <div class="col-4 border bg-white">
+      <h5 class="mt-3">Create new book</h5>
+      <hr />
+      <form
+        action="{%url 'account:add_book' current_user.id%}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="mt-3">
+          {{form.as_p}}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Thumb Pic</span>
+
+
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-4">
+            {% include 'menu.html' %}
+            <div class="col-4 border bg-white">
+                <h5 class="mt-3">Create new book</h5>
+                <hr>
+                <form action="{%url 'account:add_book' current_user.id%}" method="post" enctype="multipart/form-data">
+                    
+                    {% csrf_token %}
+                    <div class="mt-3">
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-danger w-100 font-weight-bold">add</button>
+                    </div>
+                </form>
+            </div>
+            {{ img_form.as_p }}
+          </div>
+          <button type="submit" class="btn btn-danger w-100 font-weight-bold">add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

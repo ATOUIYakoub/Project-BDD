@@ -1,0 +1,135 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container">
+  <h2 class="mt-3">Books For Category: {{ name }}</h2>
+  <hr />
+  <div class="row mt-4">
+    {% if books %} {% for book in books %}
+    <div class="col-4">
+      <div class="card" style="border-radius: 5px">
+        <img
+          class="card-img-top"
+          src="/media/{{book.thumbnail}}"
+          width="300"
+          height="250"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h6 class="card-title text-primary">{{ book.title }}</h6>
+          <p class="card-text">{{ book.description }}</p>
+          <hr />
+          {% if current_user %}
+          <a
+            href="{% url 'book:single' book_id=book.id user_id=current_user.id  %}"
+            class="btn btn-outline-warning"
+            >More Info</a
+          >
+          {% else %}
+          <a
+            href="{% url 'book:single' book_id=book.id %}"
+            class="btn btn-outline-warning"
+            >More Info</a
+          >
+          {% endif %}
+        </div>
+        <div class="card-footer">
+          <b>Quantity:<span class="pl-3">{{ book.quantity }}</span></b>
+        </div>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <div class="col-4">There is no book for this genre.!!</div>
+
+    {% endif %}
+  </div>
+</div>
+<div
+  style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+  "
+>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if current_user %} {% if page_number > 1 %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' id=current_user.id page_number=prev_num name=name%}"
+          >Previous</a
+        >
+      </li>
+      {% endif %}
+
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' id=current_user.id page_number=1 name=name%}"
+          >1</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' id=current_user.id page_number=2 name=name%}"
+          >2</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' id=current_user.id page_number=3 name=name%}"
+          >3</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' id=current_user.id page_number=next_num name=name%}"
+          >Next</a
+        >
+      </li>
+      {%else%} {% if page_number > 1 %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' page_number=prev_num name=name%}"
+          >Previous</a
+        >
+      </li>
+      {% endif %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' page_number=1 name=name%}"
+          >1</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' page_number=2 name=name%}"
+          >2</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' page_number=3 name=name%}"
+          >3</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="{%url 'book:categories' page_number=next_num name=name%}"
+          >Next</a
+        >
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endblock %}

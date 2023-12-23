@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row mt-4">
+    {% include 'menu.html' %}
+    <div class="col-9">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.quantity }}</td>
+
+            <td>
+              <div class="btn-group" role="group">
+                <a
+                  href="{% url 'account:book_edit' user_id=current_user.id book_id=book.id%}"
+                  class="btn btn-info btn-sm"
+                  >Edit</a
+                >
+                <form
+                  action="{% url 'account:all_books' user_id=current_user.id book_id=book.id%}"
+                  method="post"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    Del
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

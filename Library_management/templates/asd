@@ -1,0 +1,9 @@
+<hr />
+<p class="mb-0">
+  if you want to keep book for more extra time
+  <a
+    href="{% url_for('book.reBorrow',id=book.book)%}"
+    class="link text-secondary"
+    >Click Here !</a
+  >
+</p>
