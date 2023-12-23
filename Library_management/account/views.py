@@ -27,10 +27,10 @@ def register(request):
                        (username, email, password,image_file,is_admin,is_authenticated) VALUES (%s,%s,%s,%s,0,0)''', [cd['username'], cd['email'], encrypt(cd['password1']), 'uploads/images.png'])
 
             transaction.commit()
+            
             messages.success(
                 request, 'user registered successfully', 'success')
-
-            return HttpResponseRedirect(reverse("book:home", args=[page_number]))
+            return HttpResponseRedirect(reverse("account:login"))
     else:
         form = UserRegistrationForm()
     return render(request, 'register.html', {'form': form})
