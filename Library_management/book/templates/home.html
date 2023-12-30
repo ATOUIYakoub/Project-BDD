@@ -15,13 +15,13 @@
     {% for category in categories %} {% if current_user %}
     <a
       class="dropdown-item"
-      href="{% url 'book:categories' name=category.name id=current_user.id page_number=1 %}"
+     
       >{{ category.name }}
     </a>
     {% else %}
     <a
       class="dropdown-item"
-      href="{% url 'book:categories' name=category.name page_number=1 %}"
+      
       >{{ category.name }}
     </a>
     {% endif %} {% endfor %}

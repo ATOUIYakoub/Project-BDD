@@ -24,7 +24,8 @@ def register(request):
         if form.is_valid():
             cd = form.cleaned_data
             cursor.execute('''INSERT INTO account_user
-                       (username, email, password,image_file,is_admin,is_authenticated) VALUES (%s,%s,%s,%s,0,0)''', [cd['username'], cd['email'], encrypt(cd['password1']), 'uploads/images.png'])
+                       (username, email, password,image_file,is_admin,is_authenticated) VALUES (%s,%s,%s,%s,0,0)''', [cd['username'],
+                        cd['email'], encrypt(cd['password1']), 'uploads/images.png'])
 
             transaction.commit()
             
@@ -299,7 +300,8 @@ def add_book(request, user_id):
         if form.is_valid():
             cd = form.cleaned_data
             cursor.execute('''INSERT INTO book_book
-                       (title, category_id, description,author,quantity,thumbnail) VALUES (%s,%s,%s,%s,%s,'')''', [cd['title'], cd['category'].id, cd['description'], cd['author'], cd['quantity']])
+                       (title, category_id, description,author,quantity,thumbnail) VALUES (%s,%s,%s,%s,%s,'')''', 
+                       [cd['title'], cd['category'].id, cd['description'], cd['author'], cd['quantity']])
             transaction.commit()
             messages.success(request, 'Book added successfully', 'success')
             return HttpResponseRedirect(reverse("account:all_books", args=[user_id]))
