@@ -1,2 +1,2 @@
 # Project-BDD
-management system for biblioteque
+management system for a Library
